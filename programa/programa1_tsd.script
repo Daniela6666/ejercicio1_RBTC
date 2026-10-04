@@ -1,0 +1,65 @@
+def programa1_tsd():
+  # Programa 1: dibuja T, S y D con el TCP en un plano vertical.
+  # Ajustado para el UR5 de URSim 5.26.1 con TCP p[0,0,0,0,0,0].
+  # Plano de trazo: y=-0.450 m. Plano de traslado: y=-0.400 m.
+  # Orientacion: eje Z de la herramienta hacia -Y de la base.
+  a_traslado = 0.5
+  v_traslado = 0.20
+  a_trazo = 0.25
+  v_trazo = 0.08
+  r = 0.004
+
+  set_tcp(p[0, 0, 0, 0, 0, 0])
+  set_payload(0.0)
+  write_output_integer_register(0, 0)
+  textmsg("PROGRAMA1_TSD_INICIO")
+
+  # LETRA T: x=-0.20...-0.08; z=0.25...0.43 m
+  popup("Pulse OK para iniciar la trayectoria de la letra T.", title="Programa 1 - Letra T", warning=False, error=False, blocking=True)
+  movej(p[-0.20, -0.400, 0.43, 1.5708, 0, 0], a=a_traslado, v=v_traslado)
+  movel(p[-0.20, -0.450, 0.43, 1.5708, 0, 0], a=a_trazo, v=v_trazo)
+  movel(p[-0.08, -0.450, 0.43, 1.5708, 0, 0], a=a_trazo, v=v_trazo)
+  movel(p[-0.08, -0.400, 0.43, 1.5708, 0, 0], a=a_trazo, v=v_trazo)
+  movej(p[-0.14, -0.400, 0.43, 1.5708, 0, 0], a=a_traslado, v=v_traslado)
+  movel(p[-0.14, -0.450, 0.43, 1.5708, 0, 0], a=a_trazo, v=v_trazo)
+  movel(p[-0.14, -0.450, 0.25, 1.5708, 0, 0], a=a_trazo, v=v_trazo)
+  movel(p[-0.14, -0.400, 0.25, 1.5708, 0, 0], a=a_trazo, v=v_trazo)
+  textmsg("PROGRAMA1_TSD_T_OK")
+  write_output_integer_register(0, 10)
+
+  # LETRA S: polilinea suavizada, x=-0.05...0.07; z=0.25...0.43 m
+  popup("Pulse OK para iniciar la trayectoria de la letra S.", title="Programa 1 - Letra S", warning=False, error=False, blocking=True)
+  movej(p[0.07, -0.400, 0.43, 1.5708, 0, 0], a=a_traslado, v=v_traslado)
+  movel(p[0.07, -0.450, 0.43, 1.5708, 0, 0], a=a_trazo, v=v_trazo)
+  movel(p[0.03, -0.450, 0.43, 1.5708, 0, 0], a=a_trazo, v=v_trazo, r=r)
+  movel(p[-0.03, -0.450, 0.42, 1.5708, 0, 0], a=a_trazo, v=v_trazo, r=r)
+  movel(p[-0.05, -0.450, 0.39, 1.5708, 0, 0], a=a_trazo, v=v_trazo, r=r)
+  movel(p[-0.03, -0.450, 0.35, 1.5708, 0, 0], a=a_trazo, v=v_trazo, r=r)
+  movel(p[0.04, -0.450, 0.33, 1.5708, 0, 0], a=a_trazo, v=v_trazo, r=r)
+  movel(p[0.07, -0.450, 0.30, 1.5708, 0, 0], a=a_trazo, v=v_trazo, r=r)
+  movel(p[0.05, -0.450, 0.26, 1.5708, 0, 0], a=a_trazo, v=v_trazo, r=r)
+  movel(p[-0.01, -0.450, 0.25, 1.5708, 0, 0], a=a_trazo, v=v_trazo, r=r)
+  movel(p[-0.05, -0.450, 0.26, 1.5708, 0, 0], a=a_trazo, v=v_trazo)
+  movel(p[-0.05, -0.400, 0.26, 1.5708, 0, 0], a=a_trazo, v=v_trazo)
+  textmsg("PROGRAMA1_TSD_S_OK")
+  write_output_integer_register(0, 20)
+
+  # LETRA D: asta vertical y contorno, x=0.10...0.23; z=0.25...0.43 m
+  popup("Pulse OK para iniciar la trayectoria de la letra D.", title="Programa 1 - Letra D", warning=False, error=False, blocking=True)
+  movej(p[0.10, -0.400, 0.25, 1.5708, 0, 0], a=a_traslado, v=v_traslado)
+  movel(p[0.10, -0.450, 0.25, 1.5708, 0, 0], a=a_trazo, v=v_trazo)
+  movel(p[0.10, -0.450, 0.43, 1.5708, 0, 0], a=a_trazo, v=v_trazo)
+  movel(p[0.15, -0.450, 0.43, 1.5708, 0, 0], a=a_trazo, v=v_trazo, r=r)
+  movel(p[0.20, -0.450, 0.41, 1.5708, 0, 0], a=a_trazo, v=v_trazo, r=r)
+  movel(p[0.23, -0.450, 0.37, 1.5708, 0, 0], a=a_trazo, v=v_trazo, r=r)
+  movel(p[0.23, -0.450, 0.31, 1.5708, 0, 0], a=a_trazo, v=v_trazo, r=r)
+  movel(p[0.20, -0.450, 0.27, 1.5708, 0, 0], a=a_trazo, v=v_trazo, r=r)
+  movel(p[0.15, -0.450, 0.25, 1.5708, 0, 0], a=a_trazo, v=v_trazo)
+  movel(p[0.10, -0.450, 0.25, 1.5708, 0, 0], a=a_trazo, v=v_trazo)
+  movel(p[0.10, -0.400, 0.25, 1.5708, 0, 0], a=a_trazo, v=v_trazo)
+
+  textmsg("PROGRAMA1_TSD_D_OK")
+  write_output_integer_register(0, 30)
+  textmsg("PROGRAMA1_TSD_FIN_OK")
+  write_output_integer_register(0, 100)
+end
